@@ -27,6 +27,7 @@ class Specialization:
 
 		new_patient=Patient(patient_name,patient_status)
 		self.patient_data_list.append(new_patient)
+		return new_patient
 		#print(f"Patient Name is {patient_name} | Patient status : {self.format_patient_status(patient_status)}")
 
 	def get_next_patient(self):
@@ -34,22 +35,22 @@ class Specialization:
 			print("No patients in this specialization")
 			return
 		next_patient=self.patient_data_list.pop(0)
-		print(f"Patient : {next_patient.name} ;Status : {next_patient.status} can consult the Doctor now")
+		print(f"ID : {next_patient.patient_id} ;Patient : {next_patient.name} ;Status : {next_patient.status} can consult the Doctor now")
 
 	def print_patients(self):
 		if len(self.patient_data_list) == 0:
 			print(f"No patients in {self.name}")
 			return
 		for patient in self.patient_data_list:
-			print(f"Patient : {patient.name} ;Status : {patient.status}")
+			print(f"ID : {patient.patient_id} ;Patient : {patient.name} ;Status : {patient.status}")
 
-	def remove_patient(self,pname):
+	def remove_patient(self,patient_id):
+		patient_id = patient_id.strip().casefold()
 		for patient in self.patient_data_list:
-			print("\n ",pname)
-			if patient.name == pname:
+			if patient.patient_id == patient_id:
 				self.patient_data_list.remove(patient)
-				print("Done")
-				return len(self.patient_data_list) > 0
+				print(f"Removed patient {patient.patient_id}")
+				return True
 		print("No such patient")
 		return False
 
